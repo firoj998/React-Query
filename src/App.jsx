@@ -1,5 +1,6 @@
 import "./App.css";
 import Home from "./components/Home";
+import PostDetailsRQ from "./components/PostDetailsRQ";
 import PostsReactQuery from "./components/PostsReactQuery";
 import PostsTraditional from "./components/PostsTraditional";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
@@ -24,6 +25,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/posts" element={<PostsTraditional />} />
           <Route path="/rq-posts" element={<PostsReactQuery />} />
+          <Route path="/rq-posts/:postId" element={<PostDetailsRQ />} />
         </Routes>
       </div>
     </BrowserRouter>
