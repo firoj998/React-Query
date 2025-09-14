@@ -116,3 +116,7 @@ nav ul li a.active {
   color: #b9bbbe;
   font-size: 18px;
 }
+
+.fruit-label {
+  font-size: 2rem;
+}

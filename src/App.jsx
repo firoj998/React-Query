@@ -1,5 +1,6 @@
 import "./App.css";
 import Home from "./components/Home";
+import PaginatedQueries from "./components/PaginatedQueries";
 import PostDetailsRQ from "./components/PostDetailsRQ";
 import PostsReactQuery from "./components/PostsReactQuery";
 import PostsTraditional from "./components/PostsTraditional";
@@ -26,6 +27,7 @@ function App() {
           <Route path="/posts" element={<PostsTraditional />} />
           <Route path="/rq-posts" element={<PostsReactQuery />} />
           <Route path="/rq-posts/:postId" element={<PostDetailsRQ />} />
+          <Route path="/paginated-fruits" element={<PaginatedQueries />} />
         </Routes>
       </div>
     </BrowserRouter>
