@@ -1,5 +1,6 @@
 import "./App.css";
 import Home from "./components/Home";
+import InfiniteQueries from "./components/InfiniteQueries";
 import PaginatedQueries from "./components/PaginatedQueries";
 import PostDetailsRQ from "./components/PostDetailsRQ";
 import PostsReactQuery from "./components/PostsReactQuery";
@@ -28,6 +29,7 @@ function App() {
           <Route path="/rq-posts" element={<PostsReactQuery />} />
           <Route path="/rq-posts/:postId" element={<PostDetailsRQ />} />
           <Route path="/paginated-fruits" element={<PaginatedQueries />} />
+          <Route path="/infinite-fruits" element={<InfiniteQueries />} />
         </Routes>
       </div>
     </BrowserRouter>

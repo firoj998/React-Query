@@ -120,3 +120,13 @@ nav ul li a.active {
 .fruit-label {
   font-size: 2rem;
 }
+.fruit-item {
+  background-color: #40444b;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 10px;
+  transition: background-color 0.3s ease;
+}
+.fruit-item:hover {
+  background-color: #4f545c;
+}

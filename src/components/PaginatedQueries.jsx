@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useState } from "react";
 
@@ -15,7 +15,8 @@ const PaginatedQueries = () => {
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["fruits", page],
-    queryFn: () => fetchFruits(page), // ✅ use page from queryKey
+    queryFn: () => fetchFruits(page),
+    placeholderData: keepPreviousData, // it will prevent the loading text by showing prev data and as soon as the network call done the new data replce with prev data
   });
   console.log("Page:", page, "Data:", data);
 
