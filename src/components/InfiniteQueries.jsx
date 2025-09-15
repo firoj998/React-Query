@@ -1,28 +1,41 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
-
+import { useEffect } from "react";
+import { useInView } from "react-intersection-observer";
 const fetchFruits = async ({ pageParam }) => {
   return await axios.get(
     `http://localhost:3000/fruits?${
-      pageParam ? `_page=${pageParam}&_per_page=4` : ""
+      pageParam ? `_page=${pageParam}&_per_page=10` : ""
     }`
   );
 };
 const InfiniteQueries = () => {
-  const { data, isLoading, isError, error, fetchNextPage, hasNextPage } =
-    useInfiniteQuery({
-      queryKey: ["fruits"],
-      queryFn: fetchFruits,
-      initialPageParam: 1,
-      getNextPageParam: (_lastPage, allPages) => {
-        if (allPages.length < 5) {
-          return allPages.length + 1;
-        } else {
-          return undefined;
-        }
-      },
-    });
-
+  const {
+    data,
+    isLoading,
+    isError,
+    error,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery({
+    queryKey: ["fruits"],
+    queryFn: fetchFruits,
+    initialPageParam: 1,
+    getNextPageParam: (_lastPage, allPages) => {
+      if (allPages.length < 5) {
+        return allPages.length + 1;
+      } else {
+        return undefined;
+      }
+    },
+  });
+  const { ref, inView } = useInView();
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage();
+    }
+  }, [fetchNextPage, inView]);
   //console.log(data);
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error: {error.message}</div>;
@@ -38,9 +51,11 @@ const InfiniteQueries = () => {
           );
         });
       })}
-      <button onClick={fetchNextPage} disabled={!hasNextPage}>
+      {/* <button onClick={fetchNextPage} disabled={!hasNextPage}>
         Load More..
-      </button>
+      </button> */}
+      {/* Infinit scrolling without using button */}
+      <div ref={ref}>{isFetchingNextPage && "Loading.."}</div>
     </div>
   );
 };
